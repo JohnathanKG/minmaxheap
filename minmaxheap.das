@@ -1,3 +1,4 @@
+options gen2
 module minmaxheap public 
 
 require daslib/typemacro_boost
@@ -286,6 +287,49 @@ struct template public TMinMaxheap {
                 display(leftChild, indent + 6)
             }
         }
+    }
+
+
+    def public is_minmax_heap(): bool {
+        var index = size - 1
+        
+        while(index > 0) {
+            let index_parent = parent(index)
+            
+            if(get_level(index) % 2 == 0) {
+                if(provider(heap[index]) <= provider(heap[index_parent])) {
+                    pass
+                } else {
+                    return false
+                }
+                
+                if(index > 2) {
+                    let grandparent = parent(index_parent)
+                    if(provider(heap[index]) >= provider(heap[grandparent])) {
+                        pass
+                    } else {
+                        return false
+                    }
+                }
+            } else {
+                if(provider(heap[index]) >= provider(heap[index_parent])) {
+                    pass
+                } else {
+                    return false
+                }
+                
+                if(index > 2) {
+                    let grandparent = parent(index_parent)
+                    if(provider(heap[index]) <= provider(heap[grandparent])) {
+                        pass
+                    } else {
+                        return false
+                    }
+                }
+            }
+            index--
+        }
+        return true
     }
 
     def build_from_arr(a: array<StoredType>, var provider: lambda<(typevalue: StoredType) -> int> ): TMinMaxheap {
