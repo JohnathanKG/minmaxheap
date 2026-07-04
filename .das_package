@@ -1,0 +1,11 @@
+options gen2
+
+require daslib/daspkg
+
+[export]
+def package() {
+    package_name("minmaxheap")
+    package_author("vi")
+    package_description("Minmax heap implementation, see github for details on usage")
+    package_source("github.com/JohnathanKG/minmaxheap")
+}
