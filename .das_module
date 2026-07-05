@@ -1,0 +1,7 @@
+options gen2
+require daslib/fio
+
+[export]
+def initialize(project_path : string) {
+    register_native_path("minmaxheap", "minmaxheap", "{project_path}/math/minmaxheap.das")
+}
