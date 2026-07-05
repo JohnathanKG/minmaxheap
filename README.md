@@ -1,4 +1,7 @@
 ```
+options gen2
+require minmaxheap/minmaxheap public
+
 struct BooleanItem {
     sort_by: int
 
