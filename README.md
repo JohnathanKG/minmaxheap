@@ -1,6 +1,6 @@
 ```
 options gen2
-require minmaxheap/minmaxheap public
+require minmaxheap/minmaxheap
 
 struct BooleanItem {
     sort_by: int
@@ -8,7 +8,9 @@ struct BooleanItem {
     value: bool
 }
 
-typedef BoolMinMaxHeap = $TMinMaxheap<BooleanItem>
+struct BoolMinMaxHeap: TMinMaxheap {
+    typedef StoredType = BooleanItem
+}
 
 [export]
 def main() {
@@ -30,7 +32,7 @@ def main() {
     
     // Initialization is as such, provided you have an array and a key to sort by (as long as your lambda returns an integer.) Preferable to the second option
     var bool_heap_test_1 = new default<BoolMinMaxHeap>.build_from_arr(bool_item_arr,
-        @(typevalue: BooleanItem) {
+        @(var typevalue: BooleanItem) {
         return typevalue.sort_by
     })
     
@@ -43,7 +45,7 @@ def main() {
 
     // Is the same as above (with inferior performance)
     var bool_heap_test_2 = new default<BoolMinMaxHeap>
-    bool_heap_test_2.define_provider(@(typevalue: BooleanItem) {
+    bool_heap_test_2.define_provider(@(var typevalue: BooleanItem) {
         return typevalue.sort_by
     })
     bool_heap_test_2.insert(BooleanItem(sort_by = 5,  value = true))
@@ -61,4 +63,5 @@ def main() {
     bool_heap_test_2.insert(BooleanItem(sort_by = 14, value = true))
     bool_heap_test_2.insert(BooleanItem(sort_by = 32, value = true))
     bool_heap_test_2.insert(BooleanItem(sort_by = 18, value = true))
-}```
+}
+```

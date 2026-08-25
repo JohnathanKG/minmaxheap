@@ -1,9 +1,9 @@
 options gen2
-module minmaxheap public 
-
+module minmaxheap shared private
 require daslib/typemacro_boost
 
-[template_structure(StoredType)]
+
+[ |> template_struct_instance]
 struct template public TMinMaxheap {
     heap: array<StoredType>
     size: int = 0

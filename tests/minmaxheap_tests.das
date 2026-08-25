@@ -1,13 +1,16 @@
 options gen2
 require dastest/testing_boost public
-require ../minmaxheap.das public
+require ../heap/minmaxheap.das public
 
 struct BooleanItem {
     sort_by: int
 
     value: bool
 }
-typedef BoolMinMaxHeap = $TMinMaxheap<BooleanItem>
+
+struct BoolMinMaxHeap: TMinMaxheap {
+    typedef StoredType = BooleanItem
+}
 
 
 var bool_item_arr = [BooleanItem(sort_by = 5,  value = true),
@@ -28,7 +31,7 @@ var bool_item_arr = [BooleanItem(sort_by = 5,  value = true),
 
 
 var bool_heap_test = new default<BoolMinMaxHeap>.build_from_arr(bool_item_arr,
-    @(typevalue: BooleanItem) {
+    @(var typevalue: BooleanItem) {
     return typevalue.sort_by
 })
 
