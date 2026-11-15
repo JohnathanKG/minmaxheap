@@ -25,7 +25,7 @@ struct template public TMinMaxheap {
     }
 
     def private const get_level(index: int) {
-        return (typeinfo sizeof(index) * 8 - 1) - clz(uint(index + 1))
+        return (typeinfo sizeof(index) * 8 - 1) - int(clz(uint(index + 1)))
     }
 
     def private push_down_min(cur: int) {
